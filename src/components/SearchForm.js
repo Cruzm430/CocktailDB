@@ -1,27 +1,37 @@
 import React from "react";
 
-
-export default function SearchForm({setSearchTerm}) {
+const SearchForm =({ setSearchTerm }) => {
   const searchValue = React.useRef("");
-  
-  React.useEffect(()=>{
-    searchValue.current.focus()
-  })
-  const handleSubmit = (e) =>{
+
+  React.useEffect(() => {
+    searchValue.current.focus();
+  }, []);
+
+  function searchCocktail() {
+    setSearchTerm(searchValue.current.value);
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
   }
-  const searchCocktail = () =>{
-    setSearchTerm(searchValue.current.value)
-  }
-  return(
+  
+  return (
     <section className="section">
       <h2 className="section-title">Search Cocktails</h2>
       <form className="form search-form" onSubmit={handleSubmit}>
-        <div className={'form-control'}>
-          <label htmlFor="name">Search for a cocktail</label>
-          <input type="text" name="name" id="name" onChange={searchCocktail} ref={searchValue}/>
+        <div className="form-control">
+          <label htmlFor="name">Search Your Favorite Cocktails!</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            ref={searchValue}
+            onChange={searchCocktail}
+          />
         </div>
       </form>
     </section>
   );
 }
+
+export default SearchForm;
