@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
 
-const SingleCocktail = () => {
+export default function SingleCocktail() {
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
-  const [cocktail, setCocktail] = useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const [cocktail, setCocktail] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setLoading(true);
     async function getCocktail() {
       try {
         const response = await fetch(
           `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
         );
-
         const data = await response.json();
-        
         if (data.drinks) {
           const {
             strDrink: name,
@@ -28,37 +26,15 @@ const SingleCocktail = () => {
             strIngredient2,
             strIngredient3,
             strIngredient4,
-            strIngredient5,
-            strIngredient6,
-            strIngredient7,
-            strIngredient8,
-            strIngredient9,
-            strIngredient10,
-            strIngredient11,
-            strIngredient12,
-            strIngredient13,
-            strIngredient14,
-            strIngredient15
+            strIngredient5
           } = data.drinks[0];
-
           const ingredients = [
             strIngredient1,
             strIngredient2,
             strIngredient3,
             strIngredient4,
-            strIngredient5,
-            strIngredient6,
-            strIngredient7,
-            strIngredient8,
-            strIngredient9,
-            strIngredient10,
-            strIngredient11,
-            strIngredient12,
-            strIngredient13,
-            strIngredient14,
-            strIngredient15
+            strIngredient5
           ];
-
           const newCocktail = {
             name,
             image,
@@ -68,7 +44,6 @@ const SingleCocktail = () => {
             instructions,
             ingredients
           };
-
           setCocktail(newCocktail);
         } else {
           setCocktail(null);
@@ -121,5 +96,3 @@ const SingleCocktail = () => {
     );
   }
 }
-
-export default SingleCocktail;

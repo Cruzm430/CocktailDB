@@ -1,29 +1,24 @@
 import React from "react";
 import Cocktail from "./Cocktail";
-
-const CocktailList = ({ cocktails, loading }) => {
+export default function CocktailList({ cocktails, loading }) {
   if (loading) {
     return <h2 className="section-title">Loading...</h2>;
   }
-
   if (cocktails.length < 1) {
     return (
       <h2 className="section-title">
-        Couldn't find a cocktail!
+        no cocktails matched your search criteria
       </h2>
     );
   }
-
   return (
     <section className="section">
-      <h2 className="section-title">Cocktails</h2>
+      <h2 className="section-title">cocktails</h2>
       <div className="cocktails-center">
-        {cocktails.map(cocktail => {
-          return <Cocktail key={cocktail.id} {...cocktail} />;
+        {cocktails.map(item => {
+          return <Cocktail key={item.id} {...item} />;
         })}
       </div>
     </section>
   );
 }
-
-export default CocktailList;
